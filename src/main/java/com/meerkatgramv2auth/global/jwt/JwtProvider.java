@@ -1,6 +1,7 @@
 package com.meerkatgramv2auth.global.jwt;
 
 import com.meerkatgramv2auth.domain.user.entity.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -41,5 +42,13 @@ public class JwtProvider {
         .claim("role", user.getRole()) // Private Claim 설정
         .signWith(secretKey) // 시그니처 작성
         .compact();
+  }
+
+  public Claims extractClaims(String token) {
+    return Jwts.parser()
+        .verifyWith(secretKey)
+        .build()
+        .parseSignedClaims(token)
+        .getPayload();
   }
 }

@@ -25,16 +25,26 @@ public class CookieManager {
         );
     }
 
-    /**
-     * Request Header에서 특정 쿠키를 획득 (Optional 반환)
-     * @param request 리퀘스트
-     * @param name 찾고자하는 쿠키명
-     * @return Optional<Cookie>
-     * @throws Exception
-     */
-    public Optional<Cookie> getCookie(HttpServletRequest request, String name) {
+    public void removeRefreshTokenToCookie(HttpServletResponse response) {
+        this.setCookie(
+            response,
+            jwtConfig.refreshTokenCookieName(),
+            null,
+            0,
+            jwtConfig.reissueUri()
+        );
+    }
+
+    public Optional<String> getRefreshTokenToCookie(HttpServletRequest request) {
+        return this.getCookie(
+            request,
+            jwtConfig.refreshTokenCookieName()).map(Cookie::getValue)
+            ;
+    }
+
+    private Optional<Cookie> getCookie(HttpServletRequest request, String name) {
         // 쿠키 존재 여부 확인
-        if(request.getCookies() == null) {
+        if (request.getCookies() == null) {
             return Optional.empty();
         }
 
@@ -45,18 +55,13 @@ public class CookieManager {
     }
 
     // 쿠키 생성 메소드
-    public void setCookie(HttpServletResponse response, String name, String value, int maxAge, String path) {
+    private void setCookie(HttpServletResponse response, String name, String value, int maxAge, String path){
         Cookie cookie = new Cookie(name, value); // 해당 이름과 값으로 쿠키 인스턴스 생성
         cookie.setPath(path); // 쿠키를 사용할 path 설정
         cookie.setMaxAge(maxAge); // 쿠키 유효 시간 설정
         cookie.setHttpOnly(true); // HTTPOnly 설정 (XSS 공격 방지)
-        cookie.setSecure(jwtConfig.secure()); // 시큐어 설정(MITM 공격 방지)
+        cookie.setSecure(jwtConfig.secure()); // 시큐어설정 (MITM 공격 방지)
 
         response.addCookie(cookie);
     }
-
-
-
-
-
 }
