@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: msa4-meerkatgram-v2-auth
+    name: meerkatgram-v2-auth
     version: v1
   web:
     error:

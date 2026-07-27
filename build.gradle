@@ -5,8 +5,8 @@ plugins {
 }
 
 group = 'com'
-version = '0.0.1-SNAPSHOT'
-description = 'msa4-meerkatgram-v2-auth'
+version = 'v1'
+description = 'meerkatgram-v2-auth'
 
 java {
     toolchain {
