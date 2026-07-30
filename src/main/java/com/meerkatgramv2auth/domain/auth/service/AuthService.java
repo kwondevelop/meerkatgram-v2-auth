@@ -88,6 +88,5 @@ public class AuthService {
     authRepository.save(user);
 
     cookieManager.removeRefreshTokenToCookie(response);
-
   }
 }

@@ -5,8 +5,8 @@ plugins {
 }
 
 group = 'com'
-version = 'v1'
-description = 'meerkatgram-v2-auth'
+version = '0.0.1-SNAPSHOT'
+description = 'msa4-meerkatgram-v2-auth'
 
 java {
     toolchain {
@@ -26,6 +26,9 @@ dependencies {
     // Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    // OAuth2
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
     // jjwt
     implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
