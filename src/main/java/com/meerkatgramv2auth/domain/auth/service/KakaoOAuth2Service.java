@@ -4,7 +4,7 @@ import com.meerkatgramv2auth.domain.user.entity.User;
 import com.meerkatgramv2auth.global.config.jpa.JPAWithDeleted;
 import com.meerkatgramv2auth.global.response.constant.CustomResponseCode;
 import com.meerkatgramv2auth.global.security.constant.ProviderPolicy;
-import com.msa4meerkatgramv2auth.domain.auth.repository.AuthRepository;
+import com.meerkatgramv2auth.domain.auth.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,8 +42,8 @@ public class KakaoOAuth2Service implements OAuth2UserService<OAuth2UserRequest, 
     String profileImageUrl = (String) kakaoAccount.get("profile_image_url");
 
     // 이메일로 유저 조회
-    User user = authRepository.findByEmail((email)
-        .orElseGet(() -> this.createKakaoUser(email, nickname, profileImageUrl)));
+    User user = authRepository.findByEmail(email)
+        .orElseGet(() -> this.createKakaoUser(email, nickname, profileImageUrl));
 
     // Provider가 카카오가 아닐 경우 예외 처리
     if(!user.getProvider().equals(ProviderPolicy.KAKAO)) {
@@ -78,7 +78,7 @@ public class KakaoOAuth2Service implements OAuth2UserService<OAuth2UserRequest, 
     user.setEmail(email);
     user.setPassword(passwordEncoder.encode(UUID.randomUUID().toString()));
     user.setNick(nickname);
-    user.setProfile(profile != null ? profile : "");
+    user.setProfile(profileImageUrl != null ? profileImageUrl : "");
     return authRepository.save(user);
   }
 }

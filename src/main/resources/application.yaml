@@ -38,9 +38,10 @@ spring:
   sql:
     init:
       data-locations: classpath*:dummy/*.sql
-      mode: always
+      mode: never
       platform: all
 
+  # Security & OAuth2
   security:
     oauth2:
       client:
@@ -124,4 +125,4 @@ minio:
 
 # Sub Service
 sub-service:
-  frontend-callback-uri:
+  frontend-callback-uri: ${FRONTEND_CALLBACK_URI}

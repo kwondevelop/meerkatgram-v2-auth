@@ -6,20 +6,37 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum CustomResponseCode {
     SUCCESS(HttpStatus.OK, "00")
-    ,NOT_REGISTERED_ERROR(HttpStatus.UNAUTHORIZED, "E01")
-    , UNAUTHENTICATED_ERROR(HttpStatus.UNAUTHORIZED, "E02")
-    , UNAUTHORIZED_ERROR(HttpStatus.FORBIDDEN, "E03")
-    , INVALID_TOKEN_ERROR(HttpStatus.UNAUTHORIZED, "E04")
-    , NOT_FOUND_DATA_ERROR(HttpStatus.NOT_FOUND, "E10")
-    , DUPLICATED_DATA_ERROR(HttpStatus.CONFLICT, "E11")
+
+    // 인증 관련 에러
+    , NOT_REGISTERED_ERROR(HttpStatus.UNAUTHORIZED, "E01")
+    , ALREADY_REGISTERED_ERROR(HttpStatus.CONFLICT, "E02")
+    , UNAUTHENTICATED_ERROR(HttpStatus.UNAUTHORIZED, "E03")
+    , UNAUTHORIZED_ERROR(HttpStatus.FORBIDDEN, "E04")
+    , INVALID_TOKEN_ERROR(HttpStatus.UNAUTHORIZED, "E05")
+
+    // NOT FOUND RESOURCE 관련 에러
+    , NOT_FOUND_RESOURCE_ERROR(HttpStatus.NOT_FOUND, "E10")
+    , DUPLICATED_RESOURCE_ERROR(HttpStatus.CONFLICT, "E11")
+
+    // 유효성 검사 관련 에러
     , INVALID_PARAMETER_ERROR(HttpStatus.BAD_REQUEST, "E21")
+
+    // OAuth2 관련 에러
     , OAUTH2_ERROR(HttpStatus.CONFLICT, "E30")
     , UNSUPPORTED_PROVIDER_ERROR(HttpStatus.CONFLICT, "E31")
-    , ALREADY_REGISTERED_ERROR(HttpStatus.CONFLICT, "E32")
+
+    // FILE 관련 에러
     , FILE_MANAGED_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "E40")
+
+    // NOT FOUND 관련 에러
     , NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "E50")
+
+    // DB 관련 에러
     , DB_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "E80")
-    , SYSTEM_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "E99")
+    , DB_DUPLICATED_KEY_ERROR(HttpStatus.CONFLICT, "E81")
+
+    // SYSTEM 관련 에러
+    , SYSTEM_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "E99"),
     ;
 
     private final HttpStatus httpStatus;

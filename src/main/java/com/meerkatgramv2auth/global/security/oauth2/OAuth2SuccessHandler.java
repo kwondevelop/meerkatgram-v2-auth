@@ -4,7 +4,7 @@ import com.meerkatgramv2auth.domain.auth.repository.AuthRepository;
 import com.meerkatgramv2auth.domain.user.entity.User;
 import com.meerkatgramv2auth.global.config.SubServiceURIConfig;
 import com.meerkatgramv2auth.global.jwt.JwtProvider;
-import com.msa4meerkatgramv2auth.global.cookie.CookieManager;
+import com.meerkatgramv2auth.global.cookie.CookieManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
@@ -26,7 +26,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
   private final SubServiceURIConfig subServiceURIConfig;
 
   @Override
-  public void onAuthenticationSuccess(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Authentication authentication) {
+  public void onAuthenticationSuccess(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Authentication authentication) throws java.io.IOException, jakarta.servlet.ServletException {
     // OAuth2 로그인 성공 시 생성하여 시큐리티 세선에 담아둔 OAuth2User 객체 획득
     DefaultOAuth2User oAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
     Map<String, Object> attributes = oAuth2User.getAttributes();

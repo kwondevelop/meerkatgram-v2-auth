@@ -1,7 +1,7 @@
 package com.meerkatgramv2auth.global.config.jpa;
 
 import jakarta.persistence.EntityManager;
-import jakarta.websocket.Session;
+import org.hibernate.Session;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
